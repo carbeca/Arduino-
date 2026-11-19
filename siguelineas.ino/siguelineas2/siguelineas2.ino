@@ -5,9 +5,14 @@ int umbral[8];
 
 void setup() {
   Serial.begin(115200);
-  
+
+  for (int i=0; i<8; i++) {
+    pinMode(pines[i], INPUT);
+
+  } 
+
   //CALIBRACIÓN
-  for(int vez=0; vez<500); vez++) {
+  for(int vez=0; vez<500; vez++) {
     for(int i=0; i<8; i++) {
       int v = analogRead(pines[i]);
       if (v < minVal[i]) minVal[i]= v;
@@ -17,7 +22,7 @@ void setup() {
   }
 
   for(int i = 0; i < 8; i++) {
-    umbral[i] = (minVal[i] + maxVal[i]) / 2; 
+    umbral[i] = minVal[i]+ ((minVal[i] + maxVal[i]) / 2); 
   }
 
 }
@@ -29,6 +34,6 @@ void loop() {
     Serial.print(digital);
     Serial.print(" ");
   }
-  Seroañ.println();
+  Serial.println();
   delay(100);
 }
